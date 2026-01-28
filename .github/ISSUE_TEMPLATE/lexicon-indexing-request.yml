@@ -1,0 +1,177 @@
+name: Lexicon Indexing Request (LIR)
+description: Propose a new Lexicon to be indexed by Hypergoat
+title: "LIR: [Lexicon Name]"
+labels: ["lir", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Lexicon Indexing Request (LIR)
+        
+        Use this form to propose a new AT Protocol Lexicon for indexing in the Hypersphere ecosystem.
+        
+        **Before submitting:**
+        - Read the [governance process](../blob/main/GOVERNANCE.md)
+        - Check existing LIRs to avoid duplicates
+        - Review the [example LIR](../blob/main/lirs/LIR-0000-example.md)
+
+  - type: input
+    id: nsid
+    attributes:
+      label: Lexicon NSID
+      description: The Namespaced Identifier for this lexicon
+      placeholder: "app.example.collection.name"
+    validations:
+      required: true
+
+  - type: textarea
+    id: abstract
+    attributes:
+      label: Abstract
+      description: A brief (2-3 sentence) summary of the lexicon and why it should be indexed
+      placeholder: |
+        This lexicon defines [what it represents]. Indexing it enables [use cases].
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: |
+        Explain why this lexicon should be added to Hypersphere:
+        - What problem does this solve?
+        - Who will benefit?
+        - What use cases are enabled?
+        - Is there existing adoption?
+      placeholder: |
+        ### Problem
+        [Describe the problem]
+        
+        ### Who Benefits
+        [List stakeholders]
+        
+        ### Use Cases
+        1. [Use case 1]
+        2. [Use case 2]
+        
+        ### Existing Adoption
+        [Describe current usage]
+    validations:
+      required: true
+
+  - type: textarea
+    id: schema
+    attributes:
+      label: Lexicon Schema
+      description: Paste the full lexicon JSON schema
+      render: json
+      placeholder: |
+        {
+          "lexicon": 1,
+          "id": "app.example.collection.name",
+          "defs": {
+            "main": {
+              "type": "record",
+              ...
+            }
+          }
+        }
+    validations:
+      required: true
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example Record
+      description: Provide an example record that conforms to this schema
+      render: json
+      placeholder: |
+        {
+          "$type": "app.example.collection.name",
+          "field1": "value",
+          "createdAt": "2024-01-15T10:30:00.000Z"
+        }
+    validations:
+      required: true
+
+  - type: textarea
+    id: queries
+    attributes:
+      label: Example GraphQL Queries
+      description: Show how users would query this data via the Hypergoat GraphQL API
+      render: graphql
+      placeholder: |
+        query GetRecords {
+          appExampleCollectionName(first: 10) {
+            edges {
+              node {
+                uri
+                did
+                field1
+              }
+            }
+          }
+        }
+    validations:
+      required: false
+
+  - type: textarea
+    id: hypergoat
+    attributes:
+      label: Hypergoat Changes
+      description: What needs to happen in Hypergoat?
+      placeholder: |
+        - [ ] Upload lexicon schema
+        - [ ] Configure Jetstream subscription
+        - [ ] Trigger backfill
+        - [ ] Custom indexing requirements (if any)
+    validations:
+      required: false
+
+  - type: textarea
+    id: impactindexer
+    attributes:
+      label: Impact Indexer Changes
+      description: What documentation or UI changes are needed?
+      placeholder: |
+        - [ ] Add to Lexicon Reference page
+        - [ ] Create collection-specific visualization
+        - [ ] Update API documentation
+    validations:
+      required: false
+
+  - type: textarea
+    id: security
+    attributes:
+      label: Security Considerations
+      description: Any privacy or security concerns?
+      placeholder: |
+        - Does this data contain PII?
+        - Are there access control requirements?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this request?
+      options:
+        - Low - Nice to have
+        - Medium - Would be useful
+        - High - Blocking a project
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have read the [governance process](../blob/main/GOVERNANCE.md)
+          required: true
+        - label: The lexicon schema is valid and complete
+          required: true
+        - label: I have checked for duplicate LIRs
+          required: true
